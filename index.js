@@ -1,6 +1,16 @@
 import express from "express";
+import axios from "axios";
 const app = express();
 const port = 3000;
+app.get("/",async(res,req) =>{
+    try{
+        const response = await axios.get("https://bored-api.appbrewery.com/random");
+        res.render("index.ejs"),{activity:response.data};
+    } catch(error){
+        console.error("failed to make  the request:",error.message);
+        res.Status(500).send("fail to fetch the request please try agin!");
+    } 
+});
 app.get ("/", (req,res) =>{
 res.send("Hello World!");
 });
